@@ -20,7 +20,7 @@ const billQuestions = [
   {
     type: "date",
     name: "date",
-    message: "Please enter the due date:",
+    message: "Please enter the due date for bill:",
     default: new Date(),
     format: { month: "short", hour: undefined, minute: undefined },
     clearable: true,
@@ -84,5 +84,54 @@ const appointmentAttendeesQuestions = [
     message: "Would you like to add another attendee?",
     name: "addAnotherAttendee",
     // validate: () => {}
+  },
+];
+
+const listQuestions = [
+  {
+    type: "input",
+    message: "Please enter the title of the list:",
+    name: "title",
+    // validate: () => {}
+  },
+  {
+    type: "date",
+    name: "date",
+    message: "Please enter the due date for list completion:",
+    default: new Date(),
+    format: { month: "short" },
+    clearable: true,
+  },
+];
+
+const listItemQuestions = [
+  {
+    type: "input",
+    message: "Please enter the list item name:",
+    name: "listItem",
+    // validate: () => {}
+  },
+  {
+    type: "confirm",
+    message: "Would you like to add another list item?",
+    name: "addListItem",
+    // validate: () => {}
+  },
+];
+
+const reminderQuestions = [
+  {
+    type: "input",
+    message: "Please enter the title of the reminder:",
+    name: "title",
+    // validate: () => {}
+  },
+  {
+    type: "date",
+    name: "date",
+    message: "Please enter the due date for reminder:",
+    default: new Date(),
+    format: { month: "short" },
+    clearable: true,
   },
 ];
