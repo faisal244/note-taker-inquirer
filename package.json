@@ -20,6 +20,7 @@
   "homepage": "https://github.com/faisal244/note-taker-inquirer#readme",
   "dependencies": {
     "inquirer": "^8.2.4",
-    "inquirer-date-prompt": "^2.0.1"
+    "inquirer-date-prompt": "^2.0.1",
+    "uuid": "^8.3.2"
   }
 }

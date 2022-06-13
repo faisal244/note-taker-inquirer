@@ -31,15 +31,26 @@
           class="d-flex justify-content-center flex-wrap flex-row align-items-center"
   >
     <!-- bill card -->
-    <div class="card note-card">
+    <div
+            class="card note-card"
+            name="note-card"
+            data-card="bill"
+            id="38e8ee65-823f-4a66-84d0-f85c0ff80297"
+    >
       <div class="card-body">
-        <h5 class="card-title">Pay electricity bill</h5>
-        <h6 class="card-subtitle mb-2 text-muted">British Gas</h6>
+        <h5 class="card-title" data-title="Pay electricity bill">
+          Pay electricity bill
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted" data-payee="British Gas">
+          British Gas
+        </h6>
         <div class="card-text amount">
-          <i class="fa-solid fa-sterling-sign me-2"></i> 30
+          <i class="fa-solid fa-sterling-sign me-2"></i
+          ><span data-amount="30">30</span>
         </div>
         <div class="card-text due-date">
-          <i class="fa-solid fa-calendar-days me-2"></i> 25th Jun, 2022
+          <i class="fa-solid fa-calendar-days me-2"></i
+          ><span data-date="25th Jun, 2022">25th Jun, 2022</span>
         </div>
         <div class="form-check form-switch mt-2">
           <input
@@ -48,23 +59,33 @@
                   role="switch"
                   checked
           />
-          <label class="form-check-label">Completed</label>
+          <label class="form-check-label" data-status="COMPLETE"
+          >COMPLETE</label
+          >
         </div>
       </div>
     </div>
 
     <!-- appointment card -->
-    <div class="card note-card">
+    <div
+            class="card note-card"
+            name="note-card"
+            data-card="appointment"
+            id="5f2a84c5-3463-45b7-9300-9402900354fd"
+    >
       <div class="card-body">
-        <h5 class="card-title">Annual budget</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Meeting</h6>
-        <ul class="card-text list-group mb-2">
+        <h5 class="card-title" data-title="Annual budget">Annual budget</h5>
+        <h6 class="card-subtitle mb-2 text-muted" data-type="Meeting">
+          Meeting
+        </h6>
+        <ul class="card-text list-group mb-2" name="attendees">
           <li class="list-group-item">Bob Smith</li>
           <li class="list-group-item">Alice Smith</li>
           <li class="list-group-item">Dave Smith</li>
         </ul>
         <div class="card-text due-date">
-          <i class="fa-solid fa-calendar-days me-2"></i> 25th Jun, 2022
+          <i class="fa-solid fa-calendar-days me-2"></i
+          ><span data-date="25th Jun, 2022">25th Jun, 2022</span>
         </div>
         <div class="form-check form-switch mt-2">
           <input
@@ -73,43 +94,73 @@
                   role="switch"
                   checked
           />
-          <label class="form-check-label">Completed</label>
+          <label class="form-check-label" data-status="COMPLETE"
+          >COMPLETE</label
+          >
         </div>
       </div>
     </div>
 
     <!-- list card -->
-    <div class="card note-card">
+    <div
+            class="card note-card"
+            name="note-card"
+            data-card="list"
+            id="00d93011-e341-4222-b395-e17ef18418b8"
+    >
       <div class="card-body">
-        <h5 class="card-title">Weekly shopping</h5>
-        <ul class="card-text list-group mb-2">
+        <h5 class="card-title" data-title="Weekly shopping">
+          Weekly shopping
+        </h5>
+        <ul class="card-text list-group mb-2" name="items">
           <li class="list-group-item">Item 1</li>
           <li class="list-group-item">Item 2</li>
           <li class="list-group-item">Item 3</li>
-          <li class="list-group-item">Item 1</li>
-          <li class="list-group-item">Item 2</li>
-          <li class="list-group-item">Item 3</li>
+          <li class="list-group-item">Item 4</li>
+          <li class="list-group-item">Item 5</li>
+          <li class="list-group-item">Item 6</li>
         </ul>
         <div class="card-text due-date">
-          <i class="fa-solid fa-calendar-days me-2"></i> 25th Jun, 2022
+          <i class="fa-solid fa-calendar-days me-2"></i
+          ><span data-date="25th Jun, 2022">25th Jun, 2022</span>
         </div>
         <div class="form-check form-switch mt-2">
-          <input class="form-check-input" type="checkbox" role="switch" />
-          <label class="form-check-label">Pending</label>
+          <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  checked
+          />
+          <label class="form-check-label" data-status="COMPLETE"
+          >COMPLETE</label
+          >
         </div>
       </div>
     </div>
 
     <!-- reminder card -->
-    <div class="card note-card">
+    <div
+            class="card note-card"
+            name="note-card"
+            data-card="reminder"
+            id="277321e3-de6f-48c3-b056-078a7ed1cae7"
+    >
       <div class="card-body">
-        <h5 class="card-title">Take out bins</h5>
+        <h5 class="card-title" data-title="Take out bins">Take out bins</h5>
         <div class="card-text due-date">
-          <i class="fa-solid fa-calendar-days me-2"></i> 25th Jun, 2022
+          <i class="fa-solid fa-calendar-days me-2"></i
+          ><span data-date="25th Jun, 2022">25th Jun, 2022</span>
         </div>
         <div class="form-check form-switch mt-2">
-          <input class="form-check-input" type="checkbox" role="switch" />
-          <label class="form-check-label">Pending</label>
+          <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  checked
+          />
+          <label class="form-check-label" data-status="COMPLETE"
+          >COMPLETE</label
+          >
         </div>
       </div>
     </div>
