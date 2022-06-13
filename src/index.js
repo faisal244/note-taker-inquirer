@@ -1,4 +1,8 @@
 const inquirer = require("inquirer");
+const Appointment = require("./lib/Appointment");
+const Bill = require("./lib/Bill");
+const List = require("./lib/List");
+const Note = require("./lib/Note");
 
 const {
   noteTypeQuestion,
@@ -15,6 +19,7 @@ inquirer.registerPrompt("date", require("inquirer-date-prompt"));
 
 const init = async () => {
   let noteCreationInProgress = true;
+  const notes = [];
 
   while (noteCreationInProgress) {
     // get the type of note to add
@@ -25,7 +30,9 @@ const init = async () => {
       // prompt bill questions and get answers
       const billAnswers = await inquirer.prompt(billQuestions);
 
-      console.log(billAnswers);
+      const bill = new Bill(billAnswers);
+
+      notes.push(bill);
     }
 
     // if appointment
@@ -51,7 +58,9 @@ const init = async () => {
         }
       }
 
-      console.log(appointmentAnswers);
+      const appointment = new Appointment(appointmentAnswers);
+
+      notes.push(appointment);
     }
 
     // if list
@@ -77,7 +86,9 @@ const init = async () => {
         }
       }
 
-      console.log(listAnswers);
+      const list = new List(listAnswers);
+
+      notes.push(list);
     }
 
     // if reminder
@@ -85,7 +96,9 @@ const init = async () => {
       // prompt reminder questions and get answers
       const reminderAnswers = await inquirer.prompt(reminderQuestions);
 
-      console.log(reminderAnswers);
+      const reminder = new Note(reminderAnswers);
+
+      notes.push(reminder);
     }
 
     const { addAnotherNote } = await inquirer.prompt(addNewNoteQuestion);
@@ -94,6 +107,8 @@ const init = async () => {
       noteCreationInProgress = false;
     }
   }
+
+  console.log(notes);
 
   console.log("generate notes and HTML");
   // generate notes and HTML
