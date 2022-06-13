@@ -1,0 +1,27 @@
+body {
+  background-color: #292929;
+}
+
+.jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #b12025;
+  color: #ffffff;
+}
+
+.note-card {
+  width: 18rem;
+  margin: 20px;
+}
+
+.due-date {
+  background-color: #b12025;
+  padding: 10px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.amount {
+  padding: 10px;
+  text-align: center;
+}
