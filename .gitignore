@@ -105,3 +105,4 @@ typings/
 /.idea/vcs.xml
 /.idea/note-taker-inquirer.iml
 /.idea/.gitignore
+.DS_Store
