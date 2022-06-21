@@ -1,8 +1,8 @@
 const generateNotes = (notes) =>
-    notes.map((note) => note.createCard()).join("");
+	notes.map((note) => note.createCard()).join("");
 
 const generateHTML = (notes) => {
-  return `<!DOCTYPE html>
+	return `<!DOCTYPE html>
     <html lang="en">
       <head>
         <meta charset="utf-8" />
@@ -32,6 +32,7 @@ const generateHTML = (notes) => {
         </header>
         <main>
           <div
+            id="notes-container"
             class="d-flex justify-content-center flex-wrap flex-row align-items-center"
           >
             ${generateNotes(notes)}
@@ -55,5 +56,5 @@ const generateHTML = (notes) => {
 };
 
 module.exports = {
-  generateHTML,
+	generateHTML,
 };

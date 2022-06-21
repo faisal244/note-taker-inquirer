@@ -1,6 +1,8 @@
-const inquirer = require("inquirer");
-const path = require("path");
 const fs = require("fs");
+const path = require("path");
+const inquirer = require("inquirer");
+const figlet = require("figlet");
+const open = require("open");
 
 const Appointment = require("./lib/Appointment");
 const Bill = require("./lib/Bill");
@@ -8,118 +10,130 @@ const List = require("./lib/List");
 const Note = require("./lib/Note");
 const { generateHTML } = require("./generator");
 const {
-  noteTypeQuestion,
-  addNewNoteQuestion,
-  billQuestions,
-  appointmentQuestions,
-  appointmentAttendeesQuestions,
-  listQuestions,
-  listItemQuestions,
-  reminderQuestions,
+	noteTypeQuestion,
+	addNewNoteQuestion,
+	billQuestions,
+	appointmentQuestions,
+	appointmentAttendeesQuestions,
+	listQuestions,
+	listItemQuestions,
+	reminderQuestions,
 } = require("./questions");
 
 inquirer.registerPrompt("date", require("inquirer-date-prompt"));
 
 const init = async () => {
-  let noteCreationInProgress = true;
-  const notes = [];
+	let noteCreationInProgress = true;
+	const notes = [];
 
-  while (noteCreationInProgress) {
-    // get the type of note to add
-    const { type } = await inquirer.prompt(noteTypeQuestion);
+	while (noteCreationInProgress) {
+		// get the type of note to add
+		const { type } = await inquirer.prompt(noteTypeQuestion);
 
-    // if bill
-    if (type === "bill") {
-      // prompt bill questions and get answers
-      const billAnswers = await inquirer.prompt(billQuestions);
+		// if bill
+		if (type === "bill") {
+			// prompt bill questions and get answers
+			const billAnswers = await inquirer.prompt(billQuestions);
 
-      const bill = new Bill(billAnswers);
+			const bill = new Bill(billAnswers);
 
-      notes.push(bill);
-    }
+			notes.push(bill);
+		}
 
-    // if appointment
-    if (type === "appointment") {
-      // prompt appointment questions and get answers
-      const appointmentAnswers = await inquirer.prompt(appointmentQuestions);
+		// if appointment
+		if (type === "appointment") {
+			// prompt appointment questions and get answers
+			const appointmentAnswers = await inquirer.prompt(appointmentQuestions);
 
-      let appointmentAttendeesInProgress = true;
-      appointmentAnswers.attendees = [];
+			let appointmentAttendeesInProgress = true;
+			appointmentAnswers.attendees = [];
 
-      // start loop for collecting attendees
-      while (appointmentAttendeesInProgress) {
-        // prompt appointment attendees questions and get answers
-        const { attendee, addAnotherAttendee } = await inquirer.prompt(
-            appointmentAttendeesQuestions
-        );
+			// start loop for collecting attendees
+			while (appointmentAttendeesInProgress) {
+				// prompt appointment attendees questions and get answers
+				const { attendee, addAnotherAttendee } = await inquirer.prompt(
+					appointmentAttendeesQuestions
+				);
 
-        // push attendee to array
-        appointmentAnswers.attendees.push(attendee);
+				// push attendee to array
+				appointmentAnswers.attendees.push(attendee);
 
-        if (!addAnotherAttendee) {
-          appointmentAttendeesInProgress = false;
-        }
-      }
+				if (!addAnotherAttendee) {
+					appointmentAttendeesInProgress = false;
+				}
+			}
 
-      const appointment = new Appointment(appointmentAnswers);
+			const appointment = new Appointment(appointmentAnswers);
 
-      notes.push(appointment);
-    }
+			notes.push(appointment);
+		}
 
-    // if list
-    if (type === "list") {
-      // prompt list questions and get answers
-      const listAnswers = await inquirer.prompt(listQuestions);
+		// if list
+		if (type === "list") {
+			// prompt list questions and get answers
+			const listAnswers = await inquirer.prompt(listQuestions);
 
-      let listItemsInProgress = true;
-      listAnswers.items = [];
+			let listItemsInProgress = true;
+			listAnswers.items = [];
 
-      // start loop for collecting list items
-      while (listItemsInProgress) {
-        // prompt list items questions and get answers
-        const { listItem, addListItem } = await inquirer.prompt(
-            listItemQuestions
-        );
+			// start loop for collecting list items
+			while (listItemsInProgress) {
+				// prompt list items questions and get answers
+				const { listItem, addListItem } = await inquirer.prompt(
+					listItemQuestions
+				);
 
-        // push attendee to array
-        listAnswers.items.push(listItem);
+				// push attendee to array
+				listAnswers.items.push(listItem);
 
-        if (!addListItem) {
-          listItemsInProgress = false;
-        }
-      }
+				if (!addListItem) {
+					listItemsInProgress = false;
+				}
+			}
 
-      const list = new List(listAnswers);
+			const list = new List(listAnswers);
 
-      notes.push(list);
-    }
+			notes.push(list);
+		}
 
-    // if reminder
-    if (type === "reminder") {
-      // prompt reminder questions and get answers
-      const reminderAnswers = await inquirer.prompt(reminderQuestions);
+		// if reminder
+		if (type === "reminder") {
+			// prompt reminder questions and get answers
+			const reminderAnswers = await inquirer.prompt(reminderQuestions);
 
-      const reminder = new Note(reminderAnswers);
+			const reminder = new Note(reminderAnswers);
 
-      notes.push(reminder);
-    }
+			notes.push(reminder);
+		}
 
-    const { addAnotherNote } = await inquirer.prompt(addNewNoteQuestion);
+		const { addAnotherNote } = await inquirer.prompt(addNewNoteQuestion);
 
-    if (!addAnotherNote) {
-      noteCreationInProgress = false;
-    }
-  }
+		if (!addAnotherNote) {
+			noteCreationInProgress = false;
+		}
+	}
 
-  console.log(notes);
+	// generate HTML
+	const html = generateHTML(notes);
 
-  // generate HTML
-  const html = generateHTML(notes);
+	// write html to file
+	fs.writeFileSync(path.join(__dirname, "../dist", "index.html"), html);
 
-  // write html to file
-  fs.writeFileSync(path.join(__dirname, "../dist", "index.html"), html);
+	console.log(
+		figlet.textSync("Done", {
+			font: "Doom",
+			horizontalLayout: "default",
+			verticalLayout: "default",
+			width: 80,
+			whitespaceBreak: true,
+		})
+	);
 
-  console.log("DONE");
+	const root = path.dirname(require.main.filename);
+
+	const absolutePath = path.join(root, "../dist/index.html");
+
+	open(`file://${absolutePath}`, { app: "chrome" });
 };
 
 init();
